@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>{{ course.title }}</title>
+  </head>
+  <body class="p-4">
+    <div class="container">
+      <h1 class="mb-3">{{ course.title }}</h1>
+      <p class="lead">{{ course.description }}</p>
+
+      <h3 class="mt-4">Lessons</h3>
+      <div class="list-group">
+        {% for lesson in course.lessons.all %}
+          <a class="list-group-item list-group-item-action" href="#">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">{{ lesson.title }}</h5>
+            </div>
+            <p class="mb-1">{{ lesson.content|truncatechars:150 }}</p>
+          </a>
+        {% empty %}
+          <div class="alert alert-secondary">No lessons yet.</div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </body>
+</html>
