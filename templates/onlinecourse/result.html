@@ -9,7 +9,7 @@
     <div class="container">
       <div class="alert alert-success">
         <h4 class="alert-heading">Congratulations</h4>
-        <p>You scored <strong>{{ submission.score }}</strong> out of <strong>{{ total_possible }}</strong>.</p>
+        <p>You scored <strong>{{ total_score }}</strong> out of <strong>{{ possible_score }}</strong>.</p>
       </div>
 
       <div class="card mb-3">
@@ -25,8 +25,9 @@
         {% for r in results %}
           <li class="list-group-item">
             <p><strong>Question {{ forloop.counter }}:</strong> {{ r.question.text }}</p>
-            <p><strong>Your answer:</strong> {% if r.chosen %}{{ r.chosen.text }}{% else %}<em>Not answered</em>{% endif %}</p>
-            <p><strong>Correct answer:</strong> {% for c in r.correct %}{{ c.text }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            <p><strong>Your answer:</strong> {% if r.selected %}{{ r.selected.text }}{% else %}<em>Not answered</em>{% endif %}</p>
+            <p><strong>Correct answer:</strong> {% for c in r.correct_choices %}{{ c.text }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            <p><strong>Result:</strong> {% if r.is_correct %}Correct{% else %}Incorrect{% endif %}</p>
           </li>
         {% endfor %}
       </ul>
