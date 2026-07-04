@@ -12,14 +12,21 @@
         <p>You scored <strong>{{ submission.score }}</strong> out of <strong>{{ total_possible }}</strong>.</p>
       </div>
 
+      <div class="card mb-3">
+        <div class="card-body">
+          <h4>Exam Results</h4>
+          <p><strong>Score status:</strong> {% if score_received %}Passed{% else %}Incomplete{% endif %}</p>
+          <p><strong>Total questions:</strong> {{ results|length }}</p>
+        </div>
+      </div>
+
       <h4>Details</h4>
       <ul class="list-group">
         {% for r in results %}
           <li class="list-group-item">
-            <strong>Q:</strong> {{ r.question.text }}<br>
-            <strong>Your answer:</strong> {% if r.chosen %}{{ r.chosen.text }}{% else %}<em>Not answered</em>{% endif %}<br>
-            <strong>Correct:</strong>
-            {% for c in r.correct %}{{ c.text }}{% if not forloop.last %}, {% endif %}{% endfor %}
+            <p><strong>Question {{ forloop.counter }}:</strong> {{ r.question.text }}</p>
+            <p><strong>Your answer:</strong> {% if r.chosen %}{{ r.chosen.text }}{% else %}<em>Not answered</em>{% endif %}</p>
+            <p><strong>Correct answer:</strong> {% for c in r.correct %}{{ c.text }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
           </li>
         {% endfor %}
       </ul>

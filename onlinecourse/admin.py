@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin, TabularInline, StackedInline
-from .models import Course, Lesson, Question, Choice, Submission
+from .models import Course, Lesson, Question, Choice, Submission, Instructor, Learner
 
 
 class ChoiceInline(TabularInline):
@@ -28,4 +28,6 @@ admin.site.register(Course)
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Choice)
+admin.site.register(Instructor)
+admin.site.register(Learner)
 admin.site.register(Submission)

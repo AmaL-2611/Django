@@ -41,5 +41,6 @@ def show_exam_result(request, submission_id):
         'submission': submission,
         'results': results,
         'total_possible': total_possible,
+        'score_received': submission.is_get_score(),
     }
     return render(request, 'onlinecourse/result.html', context)

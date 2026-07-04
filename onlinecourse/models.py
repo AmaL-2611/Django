@@ -37,6 +37,22 @@ class Choice(models.Model):
         return self.text
 
 
+class Instructor(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.full_name
+
+
+class Learner(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.full_name
+
+
 class Submission(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -46,3 +62,6 @@ class Submission(models.Model):
 
     def __str__(self):
         return f"Submission {self.id} - {self.course.title} ({self.score})"
+
+    def is_get_score(self):
+        return self.score >= 0
